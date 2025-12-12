@@ -1,0 +1,32 @@
+AI Usage for CSC309 Assignment 2
+
+I wrote all the code for this assignment myself, including the initial implementation. I used AI (Claude/Cursor) only as a debugging assistant when I encountered errors. Here's my development process:
+
+1. INITIAL IMPLEMENTATION (My Work)
+   - Read the assignment specification and designed the API structure independently
+   - Wrote the Prisma schema by referencing the Prisma documentation
+   - Implemented all Express routes and middleware myself
+   - Created the authentication logic and permission checks on my own
+   - Wrote all business logic and validation rules
+
+2. TESTING APPROACH
+   - Created comprehensive test cases to validate my API endpoints
+   - Set up side-by-side testing with the reference backend API provided by the course
+   - Made parallel calls to both my implementation and the reference API
+   - Compared responses to ensure my implementation matched expected behavior
+   - Identified discrepancies and fixed them independently
+
+3. DEBUGGING WITH AI ASSISTANCE
+   - When I encountered errors, I asked AI to help identify the issue
+   - Used AI to understand error messages from the autotester
+   - Asked for clarification on HTTP status code ordering (400, 401, 403, 404)
+   - Got help fixing syntax errors and debugging runtime issues
+   - AI helped me spot logic errors in my code that I had already written
+
+4. MY LEARNING PROCESS
+   - All architectural and design decisions were made by me
+   - I understood every line of code in my implementation
+   - AI never generated full route implementations - I wrote them myself
+   - AI only helped me fix bugs in code I had already written
+
+The final implementation is entirely my own work, with AI serving only as a debugging tool to help me fix errors more efficiently.

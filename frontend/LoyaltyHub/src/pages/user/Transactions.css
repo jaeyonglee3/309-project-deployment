@@ -1,0 +1,80 @@
+/* Toggle button inside the card header */
+.filter-toggle {
+	background: none;
+	border: none;
+	font-size: 0.9rem;
+	cursor: pointer;
+	color: #3b82f6;
+	font-weight: 500;
+	padding: 0.25rem 0.5rem;
+}
+
+/* Collapsible container */
+.filters-content {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease, opacity 0.3s ease;
+	opacity: 0;
+}
+
+/* When open */
+.filters-content.open {
+	max-height: 500px;
+	opacity: 1;
+}
+
+/* AMOUNT FILTER */
+.amount-row {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-end;
+}
+
+.amount-field,
+.operator-field {
+	flex: 1;
+}
+
+/* REDEMPTION - QR code display button */
+.qr-code-button {
+	color: black !important;
+	padding: 4px 8px !important;
+	margin-left: auto;
+	width: fit-content;
+}
+
+/* TRANSACTION CARDS - UNIQUE COLOURS FOR EACH TYPE */
+/* Ensure strong text contrast for gradients */
+.card * {
+	color: inherit;
+}
+
+/* PURCHASE — soft green gradient */
+.card-purchase {
+	background: linear-gradient(135deg, #d1fae5 0%, #6ee7b7 100%);
+	color: #064e3b;
+}
+
+/* REDEMPTION — warm red/pink gradient */
+.card-redemption {
+	background: linear-gradient(135deg, #fee2e2 0%, #fca5a5 100%);
+	color: #7f1d1d;
+}
+
+/* ADJUSTMENT — neutral blue/gray gradient */
+.card-adjustment {
+	background: linear-gradient(135deg, #e0f2fe 0%, #93c5fd 100%);
+	color: #1e3a8a;
+}
+
+/* EVENT — purple gradient */
+.card-event {
+	background: linear-gradient(135deg, #ede9fe 0%, #c4b5fd 100%);
+	color: #4c1d95;
+}
+
+/* TRANSFER — amber/orange gradient */
+.card-transfer {
+	background: linear-gradient(135deg, #fef3c7 0%, #fdba74 100%);
+	color: #7c2d12;
+}

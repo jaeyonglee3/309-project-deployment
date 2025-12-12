@@ -1,0 +1,151 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum RoleType {
+  regular
+  cashier
+  manager
+  superuser
+}
+
+enum TransactionType {
+  purchase
+  redemption
+  adjustment
+  event
+  transfer
+}
+
+enum PromotionType {
+  automatic
+  onetime
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  utorid        String    @unique
+  name          String
+  email         String    @unique
+  password      String
+  birthday      String?
+  role          RoleType  @default(regular)
+  points        Int       @default(0)
+  verified      Boolean   @default(false)
+  suspicious    Boolean   @default(false)
+  avatarUrl     String?
+  createdAt     DateTime  @default(now())
+  lastLogin     DateTime?
+  resetToken    String?
+  expiresAt     DateTime?
+
+  // Relations
+  transactions        Transaction[]  @relation("UserTransactions")
+  createdTransactions Transaction[]  @relation("CreatedByUser")
+  organizedEvents     EventOrganizer[]
+  attendedEvents      EventGuest[]
+  usedPromotions      UserPromotion[]
+}
+
+model Transaction {
+  id            Int              @id @default(autoincrement())
+  userId        Int
+  type          TransactionType
+  amount        Int              // points earned or spent (can be negative)
+  spent         Float?           // dollar amount spent (for purchase)
+  relatedId     Int?             // related transaction, user, or event ID
+  remark        String?
+  suspicious    Boolean          @default(false)
+  processed     Boolean          @default(true) // false only for redemption
+  createdAt     DateTime         @default(now())
+  createdBy     Int
+
+  // Relations
+  user          User             @relation("UserTransactions", fields: [userId], references: [id])
+  creator       User             @relation("CreatedByUser", fields: [createdBy], references: [id])
+  promotions    TransactionPromotion[]
+}
+
+model Event {
+  id             Int       @id @default(autoincrement())
+  name           String
+  description    String
+  location       String
+  startTime      DateTime
+  endTime        DateTime
+  capacity       Int?      // null means unlimited
+  pointsRemain   Int
+  pointsAwarded  Int       @default(0)
+  published      Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+
+  // Relations
+  organizers     EventOrganizer[]
+  guests         EventGuest[]
+}
+
+model EventOrganizer {
+  id        Int   @id @default(autoincrement())
+  eventId   Int
+  userId    Int
+
+  event     Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user      User  @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+}
+
+model EventGuest {
+  id        Int   @id @default(autoincrement())
+  eventId   Int
+  userId    Int
+
+  event     Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user      User  @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+}
+
+model Promotion {
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String
+  type         PromotionType
+  startTime    DateTime
+  endTime      DateTime
+  minSpending  Float?
+  rate         Float?        // additional rate on top of base rate
+  points       Int?          // fixed points to add
+  createdAt    DateTime      @default(now())
+
+  // Relations
+  transactions TransactionPromotion[]
+  usedBy       UserPromotion[]
+}
+
+model TransactionPromotion {
+  id            Int @id @default(autoincrement())
+  transactionId Int
+  promotionId   Int
+
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  promotion     Promotion   @relation(fields: [promotionId], references: [id])
+
+  @@unique([transactionId, promotionId])
+}
+
+model UserPromotion {
+  id          Int @id @default(autoincrement())
+  userId      Int
+  promotionId Int
+
+  user        User      @relation(fields: [userId], references: [id])
+  promotion   Promotion @relation(fields: [promotionId], references: [id])
+
+  @@unique([userId, promotionId])
+}

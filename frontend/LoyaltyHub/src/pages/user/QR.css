@@ -1,0 +1,40 @@
+/* Container card adjustments */
+.qr-card {
+	text-align: center;
+	padding: 2.5rem 2rem;
+}
+
+/* QR square box */
+.qr-box {
+	width: 240px;
+	height: 240px;
+	background-color: #1e293b;
+	border: none;
+	border-radius: 1rem;
+	margin: 0 auto 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* QR text inside box */
+.qr-box-text {
+	font-size: 1.5rem;
+	color: white;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+}
+
+/* QR code string under the box */
+.qr-code-value {
+	font-size: 1rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+}
+
+/* "Scan at checkout" label */
+.qr-scan-label {
+	margin-top: 0.5rem;
+}

@@ -1,0 +1,140 @@
+# Installation Guide for LoyaltyHub
+
+This guide explains how to install and set up the LoyaltyHub application on your local machine.
+
+## Prerequisites
+
+Before installing, ensure you have the following installed:
+
+1. **Node.js** (version 16 or higher recommended)
+   - Download from: https://nodejs.org/
+   - Verify installation: `node --version`
+   - Verify npm: `npm --version`
+
+2. **npm** (comes with Node.js) or **yarn**
+
+## Installation Steps
+
+### 1. Clone or Download the Project
+
+Navigate to the project directory:
+```bash
+cd course-project
+```
+
+### 2. Backend Installation
+
+1. Navigate to the backend directory:
+```bash
+cd backend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up the database:
+```bash
+# Generate Prisma client
+npx prisma generate
+
+# Run database migrations
+npx prisma migrate deploy
+
+# (Optional) Seed the database with test data
+node prisma/seed.js
+```
+
+4. (Optional) Create a `.env` file in the backend directory for environment variables:
+```
+JWT_SECRET=your-secret-key-here
+```
+
+### 3. Frontend Installation
+
+1. Navigate to the frontend directory:
+```bash
+cd ../frontend/LoyaltyHub
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. (Optional) Create a `.env` file in the frontend/LoyaltyHub directory if you need to configure the API URL:
+```
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+## Running the Application
+
+### Start Backend Server
+
+1. Navigate to backend directory:
+```bash
+cd course-project/backend
+```
+
+2. Start the server (specify port number):
+```bash
+node index.js 3000
+```
+
+The backend will run on `http://localhost:3000` (or the port you specified).
+
+### Start Frontend Development Server
+
+1. Navigate to frontend directory:
+```bash
+cd course-project/frontend/LoyaltyHub
+```
+
+2. Start the development server:
+```bash
+npm run dev
+```
+
+The frontend will typically run on `http://localhost:5173` (or another port if 5173 is in use).
+
+## Test Users
+
+After seeding the database, you can use these test accounts (all passwords are `Pass123!`):
+
+- **Regular User**: `jdoe123`
+- **Cashier**: `cashier01`
+- **Manager**: `manager01`
+- **Superuser**: `super01`
+
+## Troubleshooting
+
+### Backend Issues
+
+- **Port already in use**: Try a different port number (e.g., `node index.js 5000`)
+- **Database errors**: Make sure you've run `npx prisma generate` and `npx prisma migrate deploy`
+- **Module not found**: Run `npm install` again in the backend directory
+
+### Frontend Issues
+
+- **Port already in use**: Vite will automatically try the next available port
+- **Module not found**: Run `npm install` again in the frontend/LoyaltyHub directory
+- **API connection errors**: Make sure the backend server is running and check the `VITE_API_BASE_URL` environment variable
+
+### Database Issues
+
+- **Database file not found**: Run `npx prisma migrate deploy` to create the database
+- **Seed data not appearing**: Make sure you ran `node prisma/seed.js` after setting up the database
+
+## Additional Commands
+
+### Backend
+
+- Create superuser: `npm run createsuperuser` (then follow prompts)
+- Clean database: `npm run clean` (WARNING: This deletes all data)
+
+### Frontend
+
+- Build for production: `npm run build`
+- Preview production build: `npm run preview`
+- Lint code: `npm run lint`
