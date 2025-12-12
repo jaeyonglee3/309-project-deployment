@@ -3,32 +3,13 @@
 
 require('dotenv').config();
 
-const port = (() => {
-    const args = process.argv;
-
-    if (args.length !== 3) {
-        console.error("usage: node index.js port");
-        process.exit(1);
-    }
-
-    const num = parseInt(args[2], 10);
-    if (isNaN(num)) {
-        console.error("error: argument must be an integer.");
-        process.exit(1);
-    }
-
-    return num;
-})();
-
+const port = process.env.PORT || 3000;
 const express = require("express");
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { expressjwt: expressJwt } = require('express-jwt');
-const corsOptions = {
-    origin: process.env.FRONTEND_URL || "http://localhost:5173"
-};
-app.use(cors(corsOptions));
+const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -39,7 +20,10 @@ const prisma = new PrismaClient();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-app.use(cors());
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || "http://localhost:5173"
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));

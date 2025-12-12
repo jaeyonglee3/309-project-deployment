@@ -1,0 +1,37 @@
+**AI Usage for CSC309 Assignment 2 - Frontend**
+
+We wrote all the frontend code for this assignment ourselves, including the initial implementation. We used AI (Claude/Cursor) only as a debugging assistant when we encountered errors. Here's our development process:
+
+1. **INITIAL IMPLEMENTATION (Our Work)**
+   - Read the assignment specification and designed the component structure independently
+   - Implemented all React components and pages ourselves
+   - Created the routing structure and navigation logic
+   - Wrote all UI components and styling
+   - Implemented authentication context and protected routes
+   - Created all user-facing pages (points, QR codes, transfers, etc.)
+
+2. **TESTING APPROACH**
+   - Tested all pages manually in the browser
+   - Verified API integration with the backend
+   - Tested authentication flow and role-based access
+   - Validated form submissions and data display
+
+3. **DEBUGGING WITH AI ASSISTANCE**
+   - When we encountered errors, we asked AI to help identify the issue
+   - Used AI to understand React error messages
+   - Asked for clarification on React hooks and state management
+   - Got help fixing syntax errors and debugging runtime issues
+   - AI helped us spot logic errors in code we had already written
+
+4. **OUR LEARNING PROCESS**
+   - All architectural and design decisions were made by us
+   - We understood every line of code in our implementation
+   - AI never generated full component implementations — we wrote them ourselves
+   - AI only helped us fix bugs in code we had already written
+
+5. **TYPESCRIPT TO JSX CONVERSION**
+   - Converted all TypeScript files (.tsx) to JavaScript files (.jsx) as required
+   - Removed TypeScript type annotations while preserving all functionality
+   - Ensured all components worked correctly after conversion
+
+The final implementation is entirely our own work, with AI serving only as a debugging tool to help us fix errors more efficiently.
