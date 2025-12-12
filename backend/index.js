@@ -25,7 +25,10 @@ const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { expressjwt: expressJwt } = require('express-jwt');
-const cors = require('cors');
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || "http://localhost:5173"
+};
+app.use(cors(corsOptions));
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
